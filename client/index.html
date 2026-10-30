@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>누나 레이드 — 낙성대동굴</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 fill=%27%23ff8fb3%27/%3E%3Crect x=%273%27 y=%276%27 width=%2710%27 height=%276%27 fill=%27%23e0608f%27/%3E%3Crect x=%275%27 y=%278%27 width=%272%27 height=%272%27 fill=%27%23400%27/%3E%3Crect x=%279%27 y=%278%27 width=%272%27 height=%272%27 fill=%27%23400%27/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="importmap">{ "imports": { "three": "/vendor/three.module.js" } }</script>
+  </head>
+  <body>
+    <div id="canvas-wrap"></div>
+
+    <section id="lobby">
+      <div class="panel">
+        <h1>낙성대동굴 · 누나 레이드</h1>
+        <p class="sub">거대 돼지괴물 <b>누나</b>를 4명이 힘을 합쳐 쓰러뜨리세요. 목숨은 3개, 가장자리는 낭떠러지입니다.</p>
+
+        <form id="join-form" autocomplete="off">
+          <label for="name">닉네임</label>
+          <input id="name" maxlength="12" minlength="2" placeholder="2~12자" required />
+          <button id="join" type="submit">입장</button>
+        </form>
+        <p id="status" class="status" hidden></p>
+
+        <div id="room" hidden>
+          <div class="row">
+            <h2>참가자 <span id="count"></span></h2>
+            <ul id="players"></ul>
+          </div>
+
+          <div class="row">
+            <h2>난이도</h2>
+            <div id="difficulty" class="radios">
+              <label><input type="radio" name="difficulty" value="easy" /> 쉬움</label>
+              <label><input type="radio" name="difficulty" value="normal" checked /> 보통</label>
+              <label><input type="radio" name="difficulty" value="hard" /> 어려움</label>
+            </div>
+            <p class="hint" id="difficulty-hint">호스트만 바꿀 수 있어요.</p>
+          </div>
+
+          <div class="row">
+            <h2>초대</h2>
+            <div class="url-row">
+              <code id="public-url"></code>
+              <button id="copy-url" type="button">공개 주소 복사</button>
+            </div>
+            <p class="hint" id="url-hint"></p>
+          </div>
+
+          <div class="row">
+            <h2>조작</h2>
+            <ul class="controls">
+              <li><kbd>클릭</kbd> 마우스 잠금 · <kbd>Esc</kbd> 해제</li>
+              <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 이동 · <kbd>Space</kbd> 점프</li>
+              <li><kbd>좌클릭</kbd> 공격 / 발사 / 투척</li>
+              <li><kbd>1</kbd> 근접 무기 · <kbd>2</kbd> 활/TNT · <kbd>휠</kbd> 전환</li>
+            </ul>
+            <label class="slider">마우스 감도 <input id="sensitivity" type="range" min="0.3" max="3" step="0.1" value="1" /> <span id="sensitivity-value">1.0</span></label>
+          </div>
+
+          <button id="start" type="button">시작</button>
+          <p class="hint" id="wait-hint">호스트가 시작하길 기다리는 중…</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="spectate-banner" hidden>관전 중 — 다음 판에 참여합니다</div>
+    <div id="hud" hidden></div>
+    <div id="result" hidden></div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

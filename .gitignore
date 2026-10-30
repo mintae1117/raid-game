@@ -1,0 +1,5 @@
+node_modules/
+.superpowers/
+.nuna-admin-token
+tmp/
+client/assets/private/
